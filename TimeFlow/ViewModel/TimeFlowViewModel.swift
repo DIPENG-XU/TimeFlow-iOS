@@ -4,24 +4,21 @@ class TimeFlowViewModel: ObservableObject {
     @Published var timeUIState = TimeUIState(leftHours: 0, rightHours: 0, leftMinutes: 0, rightMinutes: 0, date: "04.29.2024")
     
     @objc func updateTime() {
-        let currentDate = Date()
+        let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HHmm MM.dd.yyyy"
+        dateFormatter.dateFormat = "MM.dd.yyyy"
+        let dateString = dateFormatter.string(from: date)
         
-        let dateString = dateFormatter.string(from: currentDate)
-        let leftHours = dateString[dateString.index(dateString.startIndex, offsetBy: 0)]
-        let rightHours = dateString[dateString.index(dateString.startIndex, offsetBy: 1)]
-        let leftMinutes = dateString[dateString.index(dateString.startIndex, offsetBy: 2)]
-        let rightMinutes = dateString[dateString.index(dateString.startIndex, offsetBy: 3)]
-        
-        let date = dateString.substring(from: dateString.index(dateString.startIndex, offsetBy: 5))
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minute = calendar.component(.minute, from: date)
         
         timeUIState = TimeUIState(
-            leftHours: Int(String(leftHours))!,
-            rightHours: Int(String(rightHours))!,
-            leftMinutes: Int(String(leftMinutes))!,
-            rightMinutes: Int(String(rightMinutes))!,
-            date: String(date)
+            leftHours: hour / 10,
+            rightHours: hour % 10,
+            leftMinutes: minute / 10,
+            rightMinutes: minute % 10,
+            date: dateString
         )
     }
     
