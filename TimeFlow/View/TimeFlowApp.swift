@@ -7,7 +7,7 @@ struct TimeFlowApp: App {
         WindowGroup {
             ContentView { leftHours, rightHours, leftMinutes, rightMinutes in
                 GeometryReader { geometryReaders in
-                    HStack(alignment: .center, spacing: -10.0, content: {
+                    HStack(alignment: .center, spacing: 4.0, content: {
                         Text(String(leftHours))
                             .font(.custom("poppins_bold.ttf", size: timeFont))
                             .foregroundColor(.white)
@@ -18,7 +18,7 @@ struct TimeFlowApp: App {
                 }
                 
                 GeometryReader { geometryReaders in
-                    HStack(alignment: .center, spacing: -10.0, content: {
+                    HStack(alignment: .center, spacing: 4.0, content: {
                         Text(String(leftMinutes))
                             .font(.custom("poppins_bold.ttf", size: timeFont))
                             .foregroundColor(.white)
