@@ -15,6 +15,7 @@
 		8B6FD7222BBB09B800407D48 /* TimeFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FD7212BBB09B800407D48 /* TimeFlowUITests.swift */; };
 		8B6FD7242BBB09B800407D48 /* TimeFlowUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FD7232BBB09B800407D48 /* TimeFlowUITestsLaunchTests.swift */; };
 		8B8E1AFB2BDC399000EF39D0 /* TimeFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E1AFA2BDC399000EF39D0 /* TimeFlowViewModel.swift */; };
+		8BAFC7AE2C29D13F00D11641 /* poppins_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BAFC7AD2C29D13F00D11641 /* poppins_bold.ttf */; };
 		8BF407912BD7F2A700B90640 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF407902BD7F2A700B90640 /* Utils.swift */; };
 		8BF407972BD7F59000B90640 /* TimeUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF407962BD7F59000B90640 /* TimeUIState.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,8 @@
 		8B6FD7212BBB09B800407D48 /* TimeFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFlowUITests.swift; sourceTree = "<group>"; };
 		8B6FD7232BBB09B800407D48 /* TimeFlowUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFlowUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8B8E1AFA2BDC399000EF39D0 /* TimeFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFlowViewModel.swift; sourceTree = "<group>"; };
+		8BAFC7AC2C29D0DB00D11641 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8BAFC7AD2C29D13F00D11641 /* poppins_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = poppins_bold.ttf; sourceTree = "<group>"; };
 		8BF407902BD7F2A700B90640 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		8BF407962BD7F59000B90640 /* TimeUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUIState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,8 +103,9 @@
 		8B6FD7032BBB09B600407D48 /* TimeFlow */ = {
 			isa = PBXGroup;
 			children = (
+				8BAFC7AD2C29D13F00D11641 /* poppins_bold.ttf */,
+				8BAFC7AC2C29D0DB00D11641 /* Info.plist */,
 				8BF407942BD7F57900B90640 /* UIState */,
-				8BF407932BD7F56E00B90640 /* Model */,
 				8BF407922BD7F3DB00B90640 /* Utils */,
 				8B7B3DB22BBB1B00000545EB /* ViewModel */,
 				8B7B3DB12BBB1AF8000545EB /* View */,
@@ -167,13 +171,6 @@
 				8BF407902BD7F2A700B90640 /* Utils.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		8BF407932BD7F56E00B90640 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		8BF407942BD7F57900B90640 /* UIState */ = {
@@ -290,6 +287,7 @@
 			files = (
 				8B6FD70E2BBB09B700407D48 /* Preview Assets.xcassets in Resources */,
 				8B6FD70B2BBB09B700407D48 /* Assets.xcassets in Resources */,
+				8BAFC7AE2C29D13F00D11641 /* poppins_bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -464,7 +462,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -482,13 +480,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TimeFlow/Preview Content\"";
+				DEVELOPMENT_TEAM = Q5JNCU4W4V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TimeFlow/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -510,13 +513,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TimeFlow/Preview Content\"";
+				DEVELOPMENT_TEAM = Q5JNCU4W4V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TimeFlow/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

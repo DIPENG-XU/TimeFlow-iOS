@@ -27,11 +27,6 @@ struct ContentView<Content: View>: View {
                         getTheContent()
                     }).background(Color.black)
                 }
-                
-                Text(viewModel.timeUIState.date)
-                    .font(.system(size: dateFont))
-                    .foregroundColor(.white)
-                    .padding(20.0)
             })
         }.onReceive(orientationPublisher) { _ in
             switch (UIDevice.current.orientation) {
