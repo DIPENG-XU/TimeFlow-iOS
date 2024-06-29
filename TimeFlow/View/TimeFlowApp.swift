@@ -23,7 +23,7 @@ struct TimeFlowApp: App {
                             .font(.custom("poppins_bold.ttf", size: timeFont))
                             .foregroundColor(.white)
                         Text(String(rightMinutes))
-                            .font(.system(size: timeFont))
+                            .font(.custom("poppins_bold.ttf", size: timeFont))
                             .foregroundColor(.white)
                     }).frame(width: geometryReaders.size.width, height: geometryReaders.size.height)
                 }

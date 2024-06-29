@@ -5,7 +5,7 @@ struct ContentView<Content: View>: View {
     
     @ObservedObject var viewModel = TimeFlowViewModel()
     
-    @State private var isPortrait:Bool = (UIScreen.main.bounds.height > UIScreen.main.bounds.width)
+    @State private var isPortrait: Bool = (UIScreen.main.bounds.height > UIScreen.main.bounds.width)
     private let orientationPublisher = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
     let content: (String, String, String, String) -> Content
     

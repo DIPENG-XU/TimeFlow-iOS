@@ -109,7 +109,6 @@
 				8BF407922BD7F3DB00B90640 /* Utils */,
 				8B7B3DB22BBB1B00000545EB /* ViewModel */,
 				8B7B3DB12BBB1AF8000545EB /* View */,
-				8B7B3DB02BBB1AED000545EB /* Service */,
 				8B6FD70A2BBB09B700407D48 /* Assets.xcassets */,
 				8B6FD70C2BBB09B700407D48 /* Preview Content */,
 			);
@@ -139,13 +138,6 @@
 				8B6FD7232BBB09B800407D48 /* TimeFlowUITestsLaunchTests.swift */,
 			);
 			path = TimeFlowUITests;
-			sourceTree = "<group>";
-		};
-		8B7B3DB02BBB1AED000545EB /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		8B7B3DB12BBB1AF8000545EB /* View */ = {
