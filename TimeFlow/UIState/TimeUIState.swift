@@ -11,4 +11,8 @@ struct TimeUIState {
     let rightMinutes: Int
     
     let date: String
+    
+    let amOrPm: Bool
+    
+    let timeFormat: Bool
 }
