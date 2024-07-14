@@ -4,7 +4,7 @@ import SwiftUI
 
 class TimeFlowViewModel: ObservableObject {
     @Published var timeUIState = TimeUIState(leftHours: 0, rightHours: 0, leftMinutes: 0, rightMinutes: 0, date: "04.29.2024")
-    @State var isPortrait: Bool = (UIScreen.main.bounds.height > UIScreen.main.bounds.width)
+    @Published var isPortrait: Bool = (UIScreen.main.bounds.height > UIScreen.main.bounds.width)
     
     private func updateTime() {
         let date = Date()
