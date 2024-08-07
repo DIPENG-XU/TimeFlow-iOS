@@ -103,7 +103,6 @@
 		8B6FD7032BBB09B600407D48 /* TimeFlow */ = {
 			isa = PBXGroup;
 			children = (
-				8BAFC7AD2C29D13F00D11641 /* poppins_bold.ttf */,
 				8BAFC7AC2C29D0DB00D11641 /* Info.plist */,
 				8BF407942BD7F57900B90640 /* UIState */,
 				8BF407922BD7F3DB00B90640 /* Utils */,
@@ -145,6 +144,7 @@
 			children = (
 				8B6FD7042BBB09B600407D48 /* TimeFlowApp.swift */,
 				8B6FD7062BBB09B600407D48 /* ContentView.swift */,
+				8BAFC7AD2C29D13F00D11641 /* poppins_bold.ttf */,
 			);
 			path = View;
 			sourceTree = "<group>";

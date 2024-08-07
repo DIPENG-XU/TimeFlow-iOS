@@ -16,7 +16,7 @@ class TimeFlowViewModel: ObservableObject {
     @Published var isPortrait: Bool = (UIScreen.main.bounds.height > UIScreen.main.bounds.width)
     
     private func updateTime() {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             let date = Date()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM.dd.yyyy"
@@ -57,10 +57,11 @@ class TimeFlowViewModel: ObservableObject {
         self.updateTime()
     }
     
-    init() {
+    var timer: Timer?
+    func startTimer() {
         DispatchQueue.global(qos: .userInteractive).async {
             self.updateTime()
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 let calendar = Calendar.current
                 let second = calendar.component(.second, from: Date())
                 if (second == 0) {
@@ -68,5 +69,9 @@ class TimeFlowViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    func stopTimer() {
+        self.timer?.invalidate()
     }
 }
