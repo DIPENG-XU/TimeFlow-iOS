@@ -3,6 +3,8 @@ import Combine
 import SwiftUI
 
 class TimeFlowViewModel: ObservableObject {
+    private var isFirstUpdate: Bool = true
+    
     @Published var timeUIState = TimeUIState(
         leftHours: 0,
         rightHours: 0,
@@ -16,7 +18,7 @@ class TimeFlowViewModel: ObservableObject {
     @Published var isPortrait: Bool = (UIScreen.main.bounds.height > UIScreen.main.bounds.width)
     
     private func updateTime() {
-        DispatchQueue.global(qos: .userInteractive).async {
+        DispatchQueue.global(qos: .background).async {
             let date = Date()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM.dd.yyyy"
@@ -36,17 +38,20 @@ class TimeFlowViewModel: ObservableObject {
             
             let minute = calendar.component(.minute, from: date)
             
-            DispatchQueue.main.async {
-                self.timeUIState = TimeUIState(
-                    leftHours: hour / 10,
-                    rightHours: hour % 10,
-                    leftMinutes: minute / 10,
-                    rightMinutes: minute % 10,
-                    date: dateString,
-                    amOrPm: hourOfDay < 12,
-                    timeFormat: UserDefaults.standard.bool(forKey: "timeFormat")
-                )
-
+            let second = calendar.component(.second, from: date)
+            if (self.isFirstUpdate || second == 0) {
+                DispatchQueue.main.async {
+                    self.timeUIState = TimeUIState(
+                        leftHours: hour / 10,
+                        rightHours: hour % 10,
+                        leftMinutes: minute / 10,
+                        rightMinutes: minute % 10,
+                        date: dateString,
+                        amOrPm: hourOfDay < 12,
+                        timeFormat: UserDefaults.standard.bool(forKey: "timeFormat")
+                    )
+                    self.isFirstUpdate = false
+                }
             }
         }
     }
@@ -57,21 +62,18 @@ class TimeFlowViewModel: ObservableObject {
         self.updateTime()
     }
     
-    var timer: Timer?
+    var timer: DispatchSourceTimer?
     func startTimer() {
-        DispatchQueue.global(qos: .userInteractive).async {
+        self.timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .background))
+        timer?.schedule(deadline: .now(), repeating: 1.0)
+        timer?.setEventHandler {
             self.updateTime()
-            self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                let calendar = Calendar.current
-                let second = calendar.component(.second, from: Date())
-                if (second == 0) {
-                    self.updateTime()
-                }
-            }
         }
+        timer?.resume()
     }
     
     func stopTimer() {
-        self.timer?.invalidate()
+        self.timer?.cancel()
+        timer = nil
     }
 }

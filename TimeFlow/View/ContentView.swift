@@ -5,50 +5,46 @@ struct ContentView: View {
     @ObservedObject var viewModel = TimeFlowViewModel()
     private let orientationPublisher = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
     
+    @Environment(\.scenePhase) var scenePhase
     var body: some View {
         Group {
             VStack(alignment: .center, content: {
                 if (viewModel.isPortrait) {
                     VStack(alignment: .center, spacing: nil, content: {
                         getContent(
-                            left: viewModel.timeUIState.leftHours,
-                            right: viewModel.timeUIState.rightHours, 
-                            isHourCard: true,
-                            amOrPm: viewModel.timeUIState.amOrPm,
-                            timeFormat: viewModel.timeUIState.timeFormat
+                            timeUIState: viewModel.timeUIState,
+                            isHourCard: true
                         ).onTapGesture {
                             viewModel.updateTimeFormat()
                         }
                         getContent(
-                            left: viewModel.timeUIState.leftMinutes,
-                            right: viewModel.timeUIState.rightMinutes,
-                            isHourCard: false,
-                            amOrPm: viewModel.timeUIState.amOrPm,
-                            timeFormat: viewModel.timeUIState.timeFormat
+                            timeUIState: viewModel.timeUIState,
+                            isHourCard: false
                         )
                     }).background(Color.black)
                 } else {
                     HStack(alignment: .center, spacing: nil, content: {
                         getContent(
-                            left: viewModel.timeUIState.leftHours,
-                            right: viewModel.timeUIState.rightHours,
-                            isHourCard: true,
-                            amOrPm: viewModel.timeUIState.amOrPm,
-                            timeFormat: viewModel.timeUIState.timeFormat
+                            timeUIState: viewModel.timeUIState,
+                            isHourCard: true
                         ).onTapGesture {
                             viewModel.updateTimeFormat()
                         }
                         getContent(
-                            left: viewModel.timeUIState.leftMinutes,
-                            right: viewModel.timeUIState.rightMinutes,
-                            isHourCard: false,
-                            amOrPm: viewModel.timeUIState.amOrPm,
-                            timeFormat: viewModel.timeUIState.timeFormat
+                            timeUIState: viewModel.timeUIState,
+                            isHourCard: false
                         )
                     }).background(Color.black)
                 }
             })
-        }.onReceive(orientationPublisher) { _ in
+        }.onChange(of: scenePhase, perform: { newPhase in
+            if newPhase == .active {
+                viewModel.startTimer()
+            } else if newPhase == .background {
+                viewModel.stopTimer()
+            }
+        })
+        .onReceive(orientationPublisher) { _ in
             switch (UIDevice.current.orientation) {
                 case .portrait, .portraitUpsideDown:
                     viewModel.isPortrait = true
@@ -57,27 +53,23 @@ struct ContentView: View {
                 default: 
                     break
             }
-        }.onAppear() {
-            viewModel.startTimer()
-        }.onDisappear() {
-            viewModel.stopTimer()
         }
         .background(.black)
     }
     
-    let timeCardWidth = 160.0
-    let timeCardHeight = 400.0
+    let timeCardWidth = 120.0
+    let timeCardHeight = 300.0
     
-    private func getContent(left: Int, right: Int, isHourCard: Bool = false, amOrPm: Bool = false, timeFormat: Bool = true) -> some View {
+    private func getContent(timeUIState: TimeUIState, isHourCard: Bool = true) -> some View {
         return GeometryReader { geometryProxy in
             VStack(alignment: .trailing, content: {
                 HStack(alignment: .center) {
-                    Image("ic_number\(left)_ios")
+                    Image("ic_number\(isHourCard ? timeUIState.leftHours : timeUIState.leftMinutes)_ios")
                         .resizable()
                         .scaledToFit()
                         .frame(width: timeCardWidth, height: timeCardHeight)
                     
-                    Image("ic_number\(right)_ios")
+                    Image("ic_number\(isHourCard ? timeUIState.rightHours : timeUIState.rightMinutes)_ios")
                         .resizable()
                         .scaledToFit()
                         .frame(width: timeCardWidth, height: timeCardHeight)
@@ -88,8 +80,8 @@ struct ContentView: View {
                     .frame(height: 16)
                 
                 ZStack(alignment: .trailing, content: {
-                    Text(amOrPm ? "AM" : "PM")
-                        .opacity((isHourCard && !timeFormat) ? 1.0 : 0.0)
+                    Text(timeUIState.amOrPm ? "AM" : "PM")
+                        .opacity((isHourCard && !timeUIState.timeFormat) ? 1.0 : 0.0)
                         .font(.custom("poppins_bold.ttf", size: amOrOmFont))
                         .foregroundColor(.white)
                 })
