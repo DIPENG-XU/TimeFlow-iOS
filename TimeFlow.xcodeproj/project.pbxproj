@@ -110,6 +110,7 @@
 				8B7B3DB12BBB1AF8000545EB /* View */,
 				8B6FD70A2BBB09B700407D48 /* Assets.xcassets */,
 				8B6FD70C2BBB09B700407D48 /* Preview Content */,
+				8BAFC7AD2C29D13F00D11641 /* poppins_bold.ttf */,
 			);
 			path = TimeFlow;
 			sourceTree = "<group>";
@@ -144,7 +145,6 @@
 			children = (
 				8B6FD7042BBB09B600407D48 /* TimeFlowApp.swift */,
 				8B6FD7062BBB09B600407D48 /* ContentView.swift */,
-				8BAFC7AD2C29D13F00D11641 /* poppins_bold.ttf */,
 			);
 			path = View;
 			sourceTree = "<group>";

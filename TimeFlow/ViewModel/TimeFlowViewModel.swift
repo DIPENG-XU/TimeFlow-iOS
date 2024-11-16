@@ -17,7 +17,7 @@ class TimeFlowViewModel: ObservableObject {
     
     @Published var isPortrait: Bool = (UIScreen.main.bounds.height > UIScreen.main.bounds.width)
     
-    private func updateTime() {
+    private func updateTime(forceUpdate: Bool) {
         DispatchQueue.global(qos: .background).async {
             let date = Date()
             let dateFormatter = DateFormatter()
@@ -39,7 +39,7 @@ class TimeFlowViewModel: ObservableObject {
             let minute = calendar.component(.minute, from: date)
             
             let second = calendar.component(.second, from: date)
-            if (self.isFirstUpdate || second == 0) {
+            if (self.isFirstUpdate || second == 0 || forceUpdate) {
                 DispatchQueue.main.async {
                     self.timeUIState = TimeUIState(
                         leftHours: hour / 10,
@@ -59,7 +59,7 @@ class TimeFlowViewModel: ObservableObject {
     func updateTimeFormat() {
         let currentTimeFormat = UserDefaults.standard.bool(forKey: "timeFormat")
         UserDefaults.standard.setValue(!currentTimeFormat, forKey: "timeFormat")
-        self.updateTime()
+        self.updateTime(forceUpdate: true)
     }
     
     var timer: DispatchSourceTimer?
@@ -67,7 +67,7 @@ class TimeFlowViewModel: ObservableObject {
         self.timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .background))
         timer?.schedule(deadline: .now(), repeating: 1.0)
         timer?.setEventHandler {
-            self.updateTime()
+            self.updateTime(forceUpdate: false)
         }
         timer?.resume()
     }
