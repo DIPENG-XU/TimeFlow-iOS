@@ -2,78 +2,84 @@ import Foundation
 import Combine
 import SwiftUI
 
-class TimeFlowViewModel: ObservableObject {
-    private var isFirstUpdate: Bool = true
-    
-    @Published var timeUIState = TimeUIState(
-        leftHours: 0,
-        rightHours: 0,
-        leftMinutes: 0,
-        rightMinutes: 0,
-        date: "04.29.2024",
-        amOrPm: true,
-        timeFormat: true
-    )
-    
-    @Published var isPortrait: Bool = (UIScreen.main.bounds.height > UIScreen.main.bounds.width)
-    
-    private func updateTime(forceUpdate: Bool) {
-        DispatchQueue.global(qos: .background).async {
-            let date = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM.dd.yyyy"
-            let dateString = dateFormatter.string(from: date)
-            let calendar = Calendar.current
-            
-            let hourOfDay = calendar.component(.hour, from: date)
-            
-            let hour = if (UserDefaults.standard.bool(forKey: "timeFormat")) {
-                hourOfDay
-            } else {
-                switch(hourOfDay) {
-                    case 12: 12
-                    default: hourOfDay % 12
-                }
-            }
-            
-            let minute = calendar.component(.minute, from: date)
-            
-            let second = calendar.component(.second, from: date)
-            if (self.isFirstUpdate || second == 0 || forceUpdate) {
-                DispatchQueue.main.async {
-                    self.timeUIState = TimeUIState(
-                        leftHours: hour / 10,
-                        rightHours: hour % 10,
-                        leftMinutes: minute / 10,
-                        rightMinutes: minute % 10,
-                        date: dateString,
-                        amOrPm: hourOfDay < 12,
-                        timeFormat: UserDefaults.standard.bool(forKey: "timeFormat")
-                    )
-                    self.isFirstUpdate = false
-                }
-            }
-        }
+final class TimeFlowViewModel: ObservableObject {
+    @Published var timeUIState: TimeUIState
+    @Published var isPortrait: Bool = true
+
+    private var timer: AnyCancellable?
+
+    init() {
+        // 初始化时间
+        let now = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: now)
+        let minute = calendar.component(.minute, from: now)
+
+        timeUIState = TimeFlowViewModel.makeTimeUIState(hour: hour, minute: minute, format24h: false)
+        startTimer()
     }
-    
-    func updateTimeFormat() {
-        let currentTimeFormat = UserDefaults.standard.bool(forKey: "timeFormat")
-        UserDefaults.standard.setValue(!currentTimeFormat, forKey: "timeFormat")
-        self.updateTime(forceUpdate: true)
-    }
-    
-    var timer: DispatchSourceTimer?
+
+    // MARK: - 定时器管理
     func startTimer() {
-        self.timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .background))
-        timer?.schedule(deadline: .now(), repeating: 1.0)
-        timer?.setEventHandler {
-            self.updateTime(forceUpdate: false)
-        }
-        timer?.resume()
+        stopTimer() // 避免重复启动
+        timer = Timer.publish(every: 1, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                self?.updateTime()
+            }
     }
-    
+
     func stopTimer() {
-        self.timer?.cancel()
+        timer?.cancel()
         timer = nil
+    }
+
+    // MARK: - 更新时间
+    private func updateTime() {
+        let now = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: now)
+        let minute = calendar.component(.minute, from: now)
+
+        timeUIState = TimeFlowViewModel.makeTimeUIState(
+            hour: hour,
+            minute: minute,
+            format24h: timeUIState.timeFormat
+        )
+    }
+
+    // MARK: - 切换 12/24 小时制
+    func updateTimeFormat() {
+        timeUIState.timeFormat.toggle()
+        updateTime()
+    }
+
+    // MARK: - 工具方法
+    static func makeTimeUIState(hour: Int, minute: Int, format24h: Bool) -> TimeUIState {
+        var displayHour = hour
+        var am = true
+
+        if !format24h {
+            if hour >= 12 {
+                am = false
+                displayHour = hour > 12 ? hour - 12 : 12
+            } else if hour == 0 {
+                displayHour = 12
+            }
+        }
+
+        let leftHours = displayHour / 10
+        let rightHours = displayHour % 10
+        let leftMinutes = minute / 10
+        let rightMinutes = minute % 10
+
+        return TimeUIState(
+            leftHours: leftHours,
+            rightHours: rightHours,
+            leftMinutes: leftMinutes,
+            rightMinutes: rightMinutes,
+            amOrPm: am,
+            timeFormat: format24h
+        )
     }
 }

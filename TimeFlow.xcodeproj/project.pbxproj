@@ -10,7 +10,6 @@
 		8B6FD7052BBB09B600407D48 /* TimeFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FD7042BBB09B600407D48 /* TimeFlowApp.swift */; };
 		8B6FD7072BBB09B600407D48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FD7062BBB09B600407D48 /* ContentView.swift */; };
 		8B6FD70B2BBB09B700407D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B6FD70A2BBB09B700407D48 /* Assets.xcassets */; };
-		8B6FD70E2BBB09B700407D48 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B6FD70D2BBB09B700407D48 /* Preview Assets.xcassets */; };
 		8B6FD7182BBB09B800407D48 /* TimeFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FD7172BBB09B800407D48 /* TimeFlowTests.swift */; };
 		8B6FD7222BBB09B800407D48 /* TimeFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FD7212BBB09B800407D48 /* TimeFlowUITests.swift */; };
 		8B6FD7242BBB09B800407D48 /* TimeFlowUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FD7232BBB09B800407D48 /* TimeFlowUITestsLaunchTests.swift */; };
@@ -42,7 +41,6 @@
 		8B6FD7042BBB09B600407D48 /* TimeFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFlowApp.swift; sourceTree = "<group>"; };
 		8B6FD7062BBB09B600407D48 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8B6FD70A2BBB09B700407D48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8B6FD70D2BBB09B700407D48 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8B6FD7132BBB09B800407D48 /* TimeFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B6FD7172BBB09B800407D48 /* TimeFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFlowTests.swift; sourceTree = "<group>"; };
 		8B6FD71D2BBB09B800407D48 /* TimeFlowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeFlowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,18 +107,9 @@
 				8B7B3DB22BBB1B00000545EB /* ViewModel */,
 				8B7B3DB12BBB1AF8000545EB /* View */,
 				8B6FD70A2BBB09B700407D48 /* Assets.xcassets */,
-				8B6FD70C2BBB09B700407D48 /* Preview Content */,
 				8BAFC7AD2C29D13F00D11641 /* poppins_bold.ttf */,
 			);
 			path = TimeFlow;
-			sourceTree = "<group>";
-		};
-		8B6FD70C2BBB09B700407D48 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				8B6FD70D2BBB09B700407D48 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		8B6FD7162BBB09B800407D48 /* TimeFlowTests */ = {
@@ -277,7 +266,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B6FD70E2BBB09B700407D48 /* Preview Assets.xcassets in Resources */,
 				8B6FD70B2BBB09B700407D48 /* Assets.xcassets in Resources */,
 				8BAFC7AE2C29D13F00D11641 /* poppins_bold.ttf in Resources */,
 			);
@@ -471,7 +459,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TimeFlow/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Q5JNCU4W4V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -491,9 +479,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apollo.TimeFlow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 			};
 			name = Debug;
 		};
@@ -504,7 +494,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TimeFlow/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Q5JNCU4W4V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -524,9 +514,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apollo.TimeFlow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 			};
 			name = Release;
 		};

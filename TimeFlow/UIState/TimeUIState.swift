@@ -1,18 +1,10 @@
 import Foundation
 
 struct TimeUIState {
-    
-    let leftHours: Int
-    
-    let rightHours: Int
-    
-    let leftMinutes: Int
-    
-    let rightMinutes: Int
-    
-    let date: String
-    
-    let amOrPm: Bool
-    
-    let timeFormat: Bool
+    var leftHours: Int
+    var rightHours: Int
+    var leftMinutes: Int
+    var rightMinutes: Int
+    var amOrPm: Bool        // true = AM, false = PM
+    var timeFormat: Bool    // true = 24h, false = 12h
 }
