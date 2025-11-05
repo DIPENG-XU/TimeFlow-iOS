@@ -6,18 +6,26 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     private let orientationPublisher = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
 
-    private let timeCardWidth: CGFloat = 120
-    private let timeCardHeight: CGFloat = 300
-    private let amPmFontSize: CGFloat = 24
+    private var amPmFontSize: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 48 : 24
+    }
+
+    private var timeCardWidth: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 200 : 120
+    }
+
+    private var timeCardHeight: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 500 : 300
+    }
 
     var body: some View {
-        Group {
+        ZStack {
+            Color.black.ignoresSafeArea()
+
             mainContent
-                .background(Color.black)
         }
         .onChange(of: scenePhase, perform: handleScenePhaseChange)
         .onReceive(orientationPublisher, perform: handleOrientationChange)
-        .background(.black)
     }
 
     // MARK: - 主内容布局
@@ -40,7 +48,8 @@ struct ContentView: View {
     // MARK: - 时间卡片
     private func timeCard(isHourCard: Bool) -> some View {
         let state = viewModel.timeUIState
-        let amOrPmText = (!isHourCard || state.timeFormat) ? "  " : state.amOrPm ? "AM" : "PM";
+        let amOrPmInVisible = (!isHourCard || state.timeFormat) ? 0.0 : 1.0
+        let amOrPmText = state.amOrPm ? "AM" : "PM"
         return Group {
             if viewModel.isPortrait {
                 VStack(alignment: .trailing, spacing: 8) {
@@ -49,21 +58,20 @@ struct ContentView: View {
 
                     Text(amOrPmText)
                         .font(.custom("Poppins-Bold", size: amPmFontSize))
+                        .opacity(amOrPmInVisible)
                         .foregroundColor(.white)
                         .padding(.trailing, 16)
-                        .transition(.opacity)
                 }
             } else {
                 HStack(alignment: .bottom, spacing: 12) {
                     cardPair(timeUIState: state, isHourCard: isHourCard)
                         .onTapGesture { if isHourCard { viewModel.updateTimeFormat() } }
 
-                    
                     Text(amOrPmText)
                         .font(.custom("Poppins-Bold", size: amPmFontSize))
+                        .opacity(amOrPmInVisible)
                         .foregroundColor(.white)
                         .padding(.bottom, 12)
-                        .transition(.opacity)
                 }
             }
         }
@@ -90,9 +98,9 @@ struct ContentView: View {
     // MARK: - ScenePhase & Orientation
     private func handleScenePhaseChange(_ newPhase: ScenePhase) {
         switch newPhase {
-        case .active: viewModel.startTimer()
-        case .background: viewModel.stopTimer()
-        default: break
+            case .active: viewModel.startTimer()
+            case .background: viewModel.stopTimer()
+            default: break
         }
     }
 

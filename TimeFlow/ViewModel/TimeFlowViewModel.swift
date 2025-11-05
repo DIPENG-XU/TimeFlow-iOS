@@ -22,11 +22,22 @@ final class TimeFlowViewModel: ObservableObject {
     // MARK: - 定时器管理
     func startTimer() {
         stopTimer() // 避免重复启动
-        timer = Timer.publish(every: 1, on: .main, in: .common)
-            .autoconnect()
-            .sink { [weak self] _ in
-                self?.updateTime()
-            }
+        
+        let now = Date()
+        let calendar = Calendar.current
+        let nextMinute = calendar.nextDate(after: now, matching: DateComponents(second: 0), matchingPolicy: .nextTime)!
+        let interval = nextMinute.timeIntervalSince(now) // 距离下一分钟的秒数
+
+        // 延迟触发一次 Timer，到达整分钟
+        DispatchQueue.main.asyncAfter(deadline: .now() + interval) { [weak self] in
+            self?.updateTime()
+            // 每分钟触发一次
+            self?.timer = Timer.publish(every: 60, on: .main, in: .common)
+                .autoconnect()
+                .sink { _ in
+                    self?.updateTime()
+                }
+        }
     }
 
     func stopTimer() {

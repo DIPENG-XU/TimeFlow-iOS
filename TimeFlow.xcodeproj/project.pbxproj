@@ -15,8 +15,7 @@
 		8B6FD7242BBB09B800407D48 /* TimeFlowUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6FD7232BBB09B800407D48 /* TimeFlowUITestsLaunchTests.swift */; };
 		8B8E1AFB2BDC399000EF39D0 /* TimeFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E1AFA2BDC399000EF39D0 /* TimeFlowViewModel.swift */; };
 		8BAFC7AE2C29D13F00D11641 /* poppins_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BAFC7AD2C29D13F00D11641 /* poppins_bold.ttf */; };
-		8BF407912BD7F2A700B90640 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF407902BD7F2A700B90640 /* Utils.swift */; };
-		8BF407972BD7F59000B90640 /* TimeUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF407962BD7F59000B90640 /* TimeUIState.swift */; };
+		B5826C5C2EBA71FE00DF522A /* TimeUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5826C5B2EBA71FC00DF522A /* TimeUIState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +48,7 @@
 		8B8E1AFA2BDC399000EF39D0 /* TimeFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFlowViewModel.swift; sourceTree = "<group>"; };
 		8BAFC7AC2C29D0DB00D11641 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8BAFC7AD2C29D13F00D11641 /* poppins_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = poppins_bold.ttf; sourceTree = "<group>"; };
-		8BF407902BD7F2A700B90640 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		8BF407962BD7F59000B90640 /* TimeUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUIState.swift; sourceTree = "<group>"; };
+		B5826C5B2EBA71FC00DF522A /* TimeUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUIState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +101,6 @@
 			children = (
 				8BAFC7AC2C29D0DB00D11641 /* Info.plist */,
 				8BF407942BD7F57900B90640 /* UIState */,
-				8BF407922BD7F3DB00B90640 /* Utils */,
 				8B7B3DB22BBB1B00000545EB /* ViewModel */,
 				8B7B3DB12BBB1AF8000545EB /* View */,
 				8B6FD70A2BBB09B700407D48 /* Assets.xcassets */,
@@ -146,18 +143,10 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		8BF407922BD7F3DB00B90640 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				8BF407902BD7F2A700B90640 /* Utils.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		8BF407942BD7F57900B90640 /* UIState */ = {
 			isa = PBXGroup;
 			children = (
-				8BF407962BD7F59000B90640 /* TimeUIState.swift */,
+				B5826C5B2EBA71FC00DF522A /* TimeUIState.swift */,
 			);
 			path = UIState;
 			sourceTree = "<group>";
@@ -226,10 +215,11 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					8B6FD7002BBB09B600407D48 = {
 						CreatedOnToolsVersion = 15.3;
+						LastSwiftMigration = 1630;
 					};
 					8B6FD7122BBB09B800407D48 = {
 						CreatedOnToolsVersion = 15.3;
@@ -294,9 +284,8 @@
 			files = (
 				8B6FD7072BBB09B600407D48 /* ContentView.swift in Sources */,
 				8B6FD7052BBB09B600407D48 /* TimeFlowApp.swift in Sources */,
-				8BF407972BD7F59000B90640 /* TimeUIState.swift in Sources */,
+				B5826C5C2EBA71FE00DF522A /* TimeUIState.swift in Sources */,
 				8B8E1AFB2BDC399000EF39D0 /* TimeFlowViewModel.swift in Sources */,
-				8BF407912BD7F2A700B90640 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +446,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -492,6 +482,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -525,7 +516,6 @@
 		8B6FD72B2BBB09B800407D48 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -544,7 +534,6 @@
 		8B6FD72C2BBB09B800407D48 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -563,7 +552,6 @@
 		8B6FD72E2BBB09B800407D48 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -580,7 +568,6 @@
 		8B6FD72F2BBB09B800407D48 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
