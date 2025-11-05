@@ -50,28 +50,50 @@ struct ContentView: View {
         let state = viewModel.timeUIState
         let amOrPmInVisible = (!isHourCard || state.timeFormat) ? 0.0 : 1.0
         let amOrPmText = state.amOrPm ? "AM" : "PM"
+
         return Group {
             if viewModel.isPortrait {
                 VStack(alignment: .trailing, spacing: 8) {
+                    if !isHourCard {
+                        Text(amOrPmText)
+                            .font(.custom("Poppins-Bold", size: amPmFontSize))
+                            .opacity(amOrPmInVisible)
+                            .foregroundColor(.white)
+                            .padding(.trailing, 16)
+                    }
+                    
                     cardPair(timeUIState: state, isHourCard: isHourCard)
                         .onTapGesture { if isHourCard { viewModel.updateTimeFormat() } }
 
-                    Text(amOrPmText)
-                        .font(.custom("Poppins-Bold", size: amPmFontSize))
-                        .opacity(amOrPmInVisible)
-                        .foregroundColor(.white)
-                        .padding(.trailing, 16)
+                    if isHourCard {
+                        Text(amOrPmText)
+                            .font(.custom("Poppins-Bold", size: amPmFontSize))
+                            .opacity(amOrPmInVisible)
+                            .foregroundColor(.white)
+                            .padding(.trailing, 16)
+                    }
                 }
             } else {
                 HStack(alignment: .bottom, spacing: 12) {
+                    if !isHourCard {
+                        Text(amOrPmText)
+                            .font(.custom("Poppins-Bold", size: amPmFontSize))
+                            .opacity(amOrPmInVisible)
+                            .foregroundColor(.white)
+                            .padding(.trailing, 16)
+                    }
+                    
+                    
                     cardPair(timeUIState: state, isHourCard: isHourCard)
                         .onTapGesture { if isHourCard { viewModel.updateTimeFormat() } }
 
-                    Text(amOrPmText)
-                        .font(.custom("Poppins-Bold", size: amPmFontSize))
-                        .opacity(amOrPmInVisible)
-                        .foregroundColor(.white)
-                        .padding(.bottom, 12)
+                    if isHourCard {
+                        Text(amOrPmText)
+                            .font(.custom("Poppins-Bold", size: amPmFontSize))
+                            .opacity(amOrPmInVisible)
+                            .foregroundColor(.white)
+                            .padding(.trailing, 16)
+                    }
                 }
             }
         }
